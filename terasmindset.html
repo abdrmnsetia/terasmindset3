@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerasMindset - Platform Eksplorasi Bakat & Keterampilan Premium</title>
+    
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyberdark: '#05070c',
+                        glasscard: 'rgba(13, 18, 30, 0.75)',
+                        borderglow: 'rgba(255, 255, 255, 0.08)',
+                        brandgreen: '#10b981',
+                        brandblue: '#3b82f6',
+                        brandgold: '#f59e0b',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Animasi Kustom & Efek Efek Visual */
+        body {
+            background-color: #05070c;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .glassmorphism {
+            backdrop-filter: blur(20px);
+            background: rgba(13, 18, 30, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glow-green {
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .glow-blue {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Efek Teks Gradasi Bergerak Premium */
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animated-gradient-text {
+            background: linear-gradient(270deg, #10b981, #3b82f6, #06b6d4, #10b981);
+            background-size: 600% 600%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 8s ease infinite;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .animated-gradient-text:hover {
+            filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.5));
+            transform: translateY(-2px);
+        }
+
+        /* Efek Shimmer/Sinar Menyapu Premium untuk Button */
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        .btn-premium-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-premium-shimmer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.35) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            transition: 0.75s;
+        }
+        .btn-premium-shimmer:hover::before {
+            animation: shine 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        /* Scrollbar Premium */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05070c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+
+        /* Menyembunyikan scrollbar bawaan untuk navigasi horizontal agar tetap rapi */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.02); }
+        }
+
+        .pulse-glow-element {
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+
+        /* Transisi Halaman Lembut */
+        .page-transition {
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Chart-specific classes */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            height: 220px;
+            align-items: end;
+            padding: 16px 8px;
+        }
+
+        .chart-bar-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .chart-bar-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .chart-bar {
+            width: 100%;
+            border-radius: 6px;
+            transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 0%;
+        }
+
+        .chart-label {
+            margin-top: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            color: #94a3b8;
+        }
+
+        .quiz-progress {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.05);
+            height: 6px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .quiz-bar {
+            height: 100%;
+            background: linear-gradient(to right, #10b981, #3b82f6);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-brandgreen selection:text-white">
+
+    <!-- SCREEN LOADING PREMIUM -->
+    <div id="loader" class="fixed inset-0 bg-cyberdark z-50 flex flex-col justify-center items-center transition-opacity duration-700">
+        <div class="relative w-24 h-24">
+            <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-brandgreen animate-spin" style="animation-duration: 1.2s;"></div>
+            <div class="absolute inset-2 rounded-full border-4 border-transparent border-b-brandblue animate-spin" style="animation-duration: 1.8s; animation-direction: reverse;"></div>
+            <div class="absolute inset-4 rounded-full bg-slate-900 flex items-center justify-center text-xs font-black text-white">TM</div>
+        </div>
+        <h3 class="text-white font-semibold text-lg mt-6 tracking-widest animate-pulse uppercase">MEMUAT TERASMINDSET</h3>
+        <p class="text-slate-400 text-xs mt-2 font-medium">Menyiapkan Ekosistem Bakat Era Digital...</p>
+    </div>
+
+    <!-- MODAL CUSTOM UNTUK NOTIFIKASI LEVEL UP & EVENT -->
+    <div id="custom-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="glassmorphism p-8 rounded-3xl max-w-md w-full mx-4 text-center transform scale-90 transition-transform duration-300" id="modal-box">
+            <div class="w-20 h-20 mx-auto bg-gradient-to-tr from-brandgreen to-brandblue rounded-full flex items-center justify-center text-3xl mb-4 shadow-lg glow-green animate-bounce" id="modal-icon">
+                <i class="fa-solid fa-trophy text-white"></i>
+            </div>
+            <h3 class="text-2xl font-extrabold text-white mb-2" id="modal-title">Selamat!</h3>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6" id="modal-message">Pesan notifikasi premium di sini.</p>
+            <div class="space-y-3">
+                <button onclick="closeCustomModal()" class="w-full py-3 bg-gradient-to-r from-brandgreen to-brandblue hover:from-emerald-500 hover:to-blue-600 rounded-xl font-bold transition-all duration-300 text-white shadow-lg shadow-brandgreen/20">
+                    Lanjutkan Eksplorasi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LAYAR GERBANG UTAMA / AUTH WALL -->
+    <div id="auth-wall" class="fixed inset-0 z-40 flex items-center justify-center bg-cyberdark overflow-y-auto py-12 px-4 transition-opacity duration-500">
+        <div class="glassmorphism p-8 rounded-3xl max-w-md w-full text-center space-y-6 relative">
+            <div class="absolute top-0 right-0 w-48 h-48 bg-brandgreen/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brandgreen to-brandblue flex items-center justify-center font-black text-2xl text-white mx-auto shadow-md glow-green">
+                TM
+            </div>
+            <div>
+                <h2 class="text-2xl font-black text-white" id="auth-wall-title">Selamat Datang di TerasMindset</h2>
+                <p class="text-xs text-slate-400 mt-1 leading-relaxed">Buat akun siswa atau masuk untuk mengamankan kemajuan bakat serta mengakses dashboard interaktif Anda.</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="grid grid-cols-2 gap-2 bg-slate-950 p-1.5 rounded-xl border border-white/5">
+                <button type="button" onclick="setAuthWallMode('signup')" id="wall-tab-signup" class="py-2.5 rounded-lg text-xs font-bold transition-all duration-300 bg-brandgreen text-white">Daftar Baru</button>
+                <button type="button" onclick="setAuthWallMode('login')" id="wall-tab-login" class="py-2.5 rounded-lg text-xs font-bold transition-all duration-300 text-slate-400 hover:text-white">Masuk Akun</button>
+            </div>
+
+            <form id="auth-wall-form" onsubmit="handleAuthWallSubmit(event)" class="space-y-4 text-left">
+                <div id="wall-field-name">
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Nama Lengkap</label>
+                    <input type="text" id="wall-name" class="w-full bg-slate-950/80 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandgreen transition-all" placeholder="Masukkan nama lengkap Anda">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Alamat Email</label>
+                    <input type="email" id="wall-email" class="w-full bg-slate-950/80 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandgreen transition-all" placeholder="contoh@email.com" required>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Kata Sandi (Min. 6 Karakter)</label>
+                    <input type="password" id="wall-password" class="w-full bg-slate-950/80 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandgreen transition-all" placeholder="••••••••" required minlength="6">
+                </div>
+                
+                <p id="wall-error-msg" class="text-xs text-red-400 font-medium hidden bg-red-500/10 p-2.5 rounded-xl border border-red-500/20"></p>
+
+                <button type="submit" id="wall-submit-btn" class="w-full py-3 bg-gradient-to-r from-brandgreen to-brandblue hover:from-emerald-500 hover:to-blue-600 rounded-xl font-bold transition-all duration-300 text-white shadow-lg shadow-brandgreen/20">
+                    Daftar & Masuk Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN APP INTERFACE (AWALNYA TERSEMBUNYI) -->
+    <div id="main-app" class="hidden opacity-0 transition-opacity duration-500 flex-1 flex flex-col">
+        <!-- HEADER NAVIGATION BAR -->
+        <header class="glassmorphism sticky top-0 z-30 px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandgreen to-brandblue flex items-center justify-center font-black text-lg text-white shadow-md glow-green">
+                    TM
+                </div>
+                <div class="text-left">
+                    <h1 class="text-lg font-black tracking-tight text-white">TERASMINDSET</h1>
+                </div>
+            </div>
+            
+            <!-- Gamification Mini Widget -->
+            <div class="flex items-center gap-6 glassmorphism px-4 py-2 rounded-2xl bg-slate-900/40">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-brandgreen to-brandblue flex items-center justify-center font-extrabold text-sm text-white animate-pulse" id="widget-avatar">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                    </div>
+                    <div>
+                        <p class="text-[9px] text-slate-400 font-bold uppercase leading-none" id="widget-account-status">Status Siswa</p>
+                        <p class="text-xs font-bold text-brandgold" id="widget-rank">Level 1 Rookie</p>
+                    </div>
+                </div>
+                <div class="w-36 hidden sm:block">
+                    <div class="flex justify-between text-[9px] text-slate-400 mb-1 font-semibold">
+                        <span>PROGRESS EXP</span>
+                        <span id="widget-xp-text">0 / 100 XP</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                        <div id="widget-xp-fill" class="bg-gradient-to-r from-brandgreen to-brandblue h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENT WRAPPER -->
+        <div class="wrapper flex-1 flex flex-col lg:flex-row max-w-[1400px] w-full mx-auto gap-8 px-6 py-8">
+            
+            <!-- SIDEBAR NAVIGATION -->
+            <aside class="w-full lg:w-[280px] shrink-0 space-y-6">
+                <!-- Sidebar User Card -->
+                <div class="glassmorphism p-5 rounded-3xl text-center flex flex-col items-center">
+                    <div class="w-16 h-16 rounded-full bg-slate-900 border-2 border-brandgreen/30 flex items-center justify-center text-2xl mb-3 text-white" id="sidebar-user-avatar">
+                        <i class="fa-solid fa-user-ninja"></i>
+                    </div>
+                    <h4 id="sidebar-user-name" class="font-extrabold text-sm text-white">Siswa Tamu (Guest)</h4>
+                    <p id="sidebar-user-email" class="text-[10px] text-slate-400 mb-4 font-semibold">Siswa Terdaftar Permanen</p>
+                    
+                    <button onclick="handleLogout()" id="sidebar-auth-action" class="w-full py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 hover:text-white rounded-xl text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-right-from-bracket"></i> <span>Keluar Akun</span>
+                    </button>
+                </div>
+
+                <nav class="glassmorphism p-4 rounded-3xl sticky top-28">
+                    <ul class="flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible gap-2 pb-2 lg:pb-0 no-scrollbar">
+                        <li class="shrink-0 lg:w-full">
+                            <button onclick="switchTab('proposal-tab')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300 bg-brandgreen/10 text-white" id="btn-proposal-tab">
+                                <i class="fa-solid fa-file-invoice text-base"></i> Proposal Penelitian
+                            </button>
+                        </li>
+                        <li class="shrink-0 lg:w-full">
+                            <button onclick="switchTab('quests-tab')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300" id="btn-quests-tab">
+                                <i class="fa-solid fa-circle-nodes text-base"></i> Quest Keterampilan
+                            </button>
+                        </li>
+                        <li class="shrink-0 lg:w-full">
+                            <button onclick="switchTab('riwayat-tab')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300" id="btn-riwayat-tab">
+                                <i class="fa-solid fa-clock-rotate-left text-base"></i> Riwayat & Analisis
+                            </button>
+                        </li>
+                        <li class="shrink-0 lg:w-full">
+                            <button onclick="switchTab('konselor-tab')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300" id="btn-konselor-tab">
+                                <i class="fa-solid fa-chart-line text-base"></i> Dashboard Konselor
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- MAIN PANEL -->
+            <main class="flex-1 flex flex-col min-w-0">
+                
+                <!-- TAB 1: PROPOSAL PENELITIAN -->
+                <div id="proposal-tab" class="page-transition tab-content block space-y-6">
+                    <!-- Proposal Cover Banner -->
+                    <div class="glassmorphism p-8 rounded-3xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                        <div class="absolute top-0 right-0 w-80 h-80 bg-brandgreen/10 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="z-10 max-w-xl">
+                            <span class="px-3 py-1 bg-brandgreen/10 border border-brandgreen/30 text-brandgreen rounded-full text-xs font-bold uppercase tracking-wider mb-3 inline-block">Kategori: Edu-Psikologi & Kesehatan Mental</span>
+                            
+                            <!-- PREMIUM ANIMATED GRADIENT TEXT TITLE -->
+                            <h2 class="animated-gradient-text text-2xl md:text-3xl font-extrabold mb-3 select-none cursor-pointer">
+                                TERASMINDSET: Pengembangan Platform Life Skill Berbasis Holland Codes
+                            </h2>
+                            
+                            <!-- Tombol Buka Deskripsi Baru -->
+                            <button onclick="toggleProposalDescription()" class="mb-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-slate-300 hover:text-white transition-all duration-300 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-info text-brandblue transition-all" id="desc-icon"></i> 
+                                <span id="desc-btn-text">Buka Deskripsi Platform</span>
+                            </button>
+                            
+                            <!-- Deskripsi Tersembunyi (Collapsible) -->
+                            <div id="proposal-desc-block" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out text-slate-300 text-xs leading-relaxed space-y-2">
+                                <p class="pt-2">
+                                    <strong>TerasMindset</strong> adalah sebuah platform inovasi interaktif yang dirancang untuk membantu individu mengenali potensi minat dan bakat mereka menggunakan model teoretis <strong>Holland Codes (RIASEC)</strong>.
+                                </p>
+                                <p>
+                                    Platform ini menjembatani antara pengenalan diri psikologis dengan aksi nyata melalui program <strong>Quest Keterampilan Harian</strong>. Pengguna ditantang menyelesaikan misi sosial, kreatif, maupun teknikal guna mengasah kesiapan diri di era digital yang sangat dinamis ini secara sehat dan produktif.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- PREMIUM ANIMATED BUTTON -->
+                        <button onclick="switchTab('asesmen-tab')" class="btn-premium-shimmer group py-4 px-7 rounded-xl bg-gradient-to-r from-brandgreen to-brandblue hover:from-emerald-500 hover:to-blue-600 font-extrabold text-sm z-10 flex items-center gap-3.5 glow-green text-white transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1) hover:scale-105 active:scale-95 hover:shadow-[0_0_30px_rgba(16,185,129,0.45)] shrink-0">
+                            <span>Mulai Simulasi Kuis</span> 
+                            <i class="fa-solid fa-circle-chevron-right text-base transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </button>
+                    </div>
+
+                    <!-- Bab 1: Latar Belakang -->
+                    <section class="glassmorphism p-8 rounded-3xl">
+                        <h3 class="text-xl font-extrabold text-white mb-4 flex items-center gap-3">
+                            <span class="w-1.5 h-6 bg-brandgreen rounded-full"></span> 1. Latar Belakang Penelitian
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4 text-justify">
+                            Tingkat pengangguran terbuka di Indonesia saat ini masih didominasi oleh kalangan usia muda (Gen-Z). Kelulusan sekolah menengah kerap kali mengalami kendala dalam transisi karir akibat terjadinya kesenjangan yang besar antara kurikulum akademik konvensional dengan tuntutan nyata dunia industri yang dinamis di era digital.
+                        </p>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4 text-justify">
+                            Melalui kacamata <strong>Teori Fungsionalisme Struktural</strong> yang dicetuskan oleh Talcott Parsons, fenomena ini menunjukkan belum optimalnya fungsi adaptasi lembaga pendidikan dalam mempersiapkan struktur tenaga kerja yang terampil. Siswa membutuhkan jembatan preventif yang dirancang secara matang untuk mengasah kompetensi non-akademis (life skill) sebelum kelulusan tiba.
+                        </p>
+                        <p class="text-slate-300 text-sm leading-relaxed text-justify font-medium">
+                            Sebagai solusinya, penelitian ini memperkenalkan <strong>TerasMindset</strong>: sebuah ekosistem pertumbuhan digital interaktif untuk siswa yang menggunakan model psikometri <strong>Holland Codes (RIASEC)</strong> milik John L. Holland guna menyinkronkan profil psikologis dengan skenario misi keterampilan hidup yang nyata dan terarah.
+                        </p>
+                    </section>
+
+                    <!-- Bab 2: Rumusan & Tujuan -->
+                    <section class="glassmorphism p-8 rounded-3xl">
+                        <h3 class="text-xl font-extrabold text-white mb-4 flex items-center gap-3">
+                            <span class="w-1.5 h-6 bg-brandgreen rounded-full"></span> 2. Rumusan Masalah & Tujuan
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-slate-900/40 p-5 rounded-2xl border border-white/5">
+                                <h4 class="text-sm uppercase tracking-wider text-brandblue font-extrabold mb-3 flex items-center gap-2"><i class="fa-solid fa-circle-question"></i> Rumusan Masalah</h4>
+                                <ul class="list-decimal list-inside text-xs text-slate-300 space-y-2 leading-relaxed">
+                                    <li>Bagaimana rancangan arsitektur dan fungsionalitas platform TerasMindset berbasis Holland Codes untuk siswa?</li>
+                                    <li>Bagaimana efektivitas platform TerasMindset dalam memitigasi kesenjangan keterampilan di era digital bagi pelajar?</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-900/40 p-5 rounded-2xl border border-white/5">
+                                <h4 class="text-sm uppercase tracking-wider text-brandgreen font-extrabold mb-3 flex items-center gap-2"><i class="fa-solid fa-circle-check"></i> Tujuan Penelitian</h4>
+                                <ul class="list-disc list-inside text-xs text-slate-300 space-y-2 leading-relaxed">
+                                    <li>Mendeskripsikan tahapan perancangan sistematis dari model aplikasi TerasMindset.</li>
+                                    <li>Mengevaluasi pengaruh penggunaan platform terhadap tingkat kesiapan kerja siswa.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Bab 3: Landasan Teori RIASEC (INTERACTIVE PREMIUM TABS & BUTTONS) -->
+                    <section class="glassmorphism p-8 rounded-3xl">
+                        <h3 class="text-xl font-extrabold text-white mb-4 flex items-center gap-3">
+                            <span class="w-1.5 h-6 bg-brandgreen rounded-full"></span> 3. Landasan Teori: Model RIASEC
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 text-justify">
+                            Teori pilihan karir John Holland menyatakan bahwa kepuasan dan performa kerja optimal lahir dari keselarasan antara kepribadian individu dengan lingkungan karirnya. RIASEC membagi minat manusia menjadi 6 sumbu utama. Klik tombol di bawah untuk melihat penjelasan detail masing-masing tipe secara interaktif:
+                        </p>
+                        
+                        <!-- Grid Navigasi Tombol RIASEC Premium -->
+                        <div class="grid grid-cols-2 md:grid-cols-6 gap-3 mb-6" id="riasec-buttons">
+                            <button onclick="selectRiasecStep(0)" id="rbtn-0" class="r-step-btn p-3.5 rounded-2xl border border-red-500/30 bg-red-500/10 text-red-400 font-bold text-sm transition-all duration-300 flex flex-col items-center justify-center gap-1 text-center shadow-lg shadow-red-500/5">
+                                <span class="text-lg font-extrabold">R</span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider">Realistic</span>
+                            </button>
+                            <button onclick="selectRiasecStep(1)" id="rbtn-1" class="r-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-sm transition-all duration-300 flex flex-col items-center justify-center gap-1 text-center">
+                                <span class="text-lg font-extrabold">I</span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider">Investigative</span>
+                            </button>
+                            <button onclick="selectRiasecStep(2)" id="rbtn-2" class="r-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-sm transition-all duration-300 flex flex-col items-center justify-center gap-1 text-center">
+                                <span class="text-lg font-extrabold">A</span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider">Artistic</span>
+                            </button>
+                            <button onclick="selectRiasecStep(3)" id="rbtn-3" class="r-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-sm transition-all duration-300 flex flex-col items-center justify-center gap-1 text-center">
+                                <span class="text-lg font-extrabold">S</span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider">Social</span>
+                            </button>
+                            <button onclick="selectRiasecStep(4)" id="rbtn-4" class="r-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-sm transition-all duration-300 flex flex-col items-center justify-center gap-1 text-center">
+                                <span class="text-lg font-extrabold">E</span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider">Enterprising</span>
+                            </button>
+                            <button onclick="selectRiasecStep(5)" id="rbtn-5" class="r-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-sm transition-all duration-300 flex flex-col items-center justify-center gap-1 text-center">
+                                <span class="text-lg font-extrabold">C</span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider">Conventional</span>
+                            </button>
+                        </div>
+
+                        <!-- Panel Detail Deskripsi Hasil Klik RIASEC (Animasi Fade-in) -->
+                        <div class="p-6 bg-slate-950/60 rounded-2xl border border-white/5 relative overflow-hidden transition-all duration-300 min-h-[160px]" id="riasec-description-panel">
+                            <div class="absolute -right-6 -bottom-10 text-white/5 text-[10rem] font-black select-none pointer-events-none" id="r-bg-char">R</div>
+                            <div class="relative z-10">
+                                <span class="px-2.5 py-1 bg-red-500/10 border border-red-500/30 text-red-400 rounded text-xs font-bold uppercase tracking-wide mb-2 inline-block" id="r-step-badge">Realistic</span>
+                                <h4 class="text-base font-extrabold text-white mb-2" id="r-step-title">Tipe Praktikal & Fisikal (The Doers)</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed" id="r-step-desc">
+                                    Menyukai aktivitas praktis yang melibatkan pengerjaan fisik, perkakas, mesin, atau bekerja di luar ruangan. Orang dengan tipe ini cenderung kuat dalam kemampuan mekanik, atletis, dan lebih memilih bekerja dengan benda nyata daripada ide atau interaksi sosial yang kompleks.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Bab 4: Orisinalitas & Metodologi (INTERACTIVE PREMIUM TABS & BUTTONS) -->
+                    <section class="glassmorphism p-8 rounded-3xl">
+                        <h3 class="text-xl font-extrabold text-white mb-4 flex items-center gap-3">
+                            <span class="w-1.5 h-6 bg-brandgreen rounded-full"></span> 4. Orisinalitas & Metodologi Borg & Gall
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 text-justify">
+                            Berbeda dari riset terdahulu yang hanya fokus pada pengumpulan data pasif, TerasMindset offers interaktivitas karir digital aktif. Model pengembangan yang digunakan mengadaptasi siklus R&D Borg & Gall secara interaktif:
+                        </p>
+                        
+                        <!-- Navigasi Metode dalam Bentuk Tombol Premium -->
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6" id="methodology-buttons">
+                            <button onclick="selectMethodologyStep(0)" id="mbtn-0" class="m-step-btn p-3.5 rounded-2xl border border-brandgreen/30 bg-brandgreen/10 text-brandgreen font-bold text-xs transition-all duration-300 flex flex-col items-center justify-center gap-2 text-center">
+                                <i class="fa-solid fa-magnifying-glass-chart text-lg"></i>
+                                <span>1. Potensi & Masalah</span>
+                            </button>
+                            <button onclick="selectMethodologyStep(1)" id="mbtn-1" class="m-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-xs transition-all duration-300 flex flex-col items-center justify-center gap-2 text-center">
+                                <i class="fa-solid fa-database text-lg"></i>
+                                <span>2. Studi Literatur</span>
+                            </button>
+                            <button onclick="selectMethodologyStep(2)" id="mbtn-2" class="m-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-xs transition-all duration-300 flex flex-col items-center justify-center gap-2 text-center">
+                                <i class="fa-solid fa-compass-drafting text-lg"></i>
+                                <span>3. Desain Produk</span>
+                            </button>
+                            <button onclick="selectMethodologyStep(3)" id="mbtn-3" class="m-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-xs transition-all duration-300 flex flex-col items-center justify-center gap-2 text-center">
+                                <i class="fa-solid fa-vial-circle-check text-lg"></i>
+                                <span>4. Uji Coba Ahli</span>
+                            </button>
+                            <button onclick="selectMethodologyStep(4)" id="mbtn-4" class="m-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-xs transition-all duration-300 flex flex-col items-center justify-center gap-2 text-center">
+                                <i class="fa-solid fa-circle-check text-lg"></i>
+                                <span>5. Produk Akhir</span>
+                            </button>
+                        </div>
+
+                        <!-- Panel Detail Deskripsi Hasil Klik Metode (Animasi Fade-in) -->
+                        <div class="p-6 bg-slate-950/60 rounded-2xl border border-white/5 relative overflow-hidden transition-all duration-300 min-h-[140px]" id="method-description-panel">
+                            <span class="px-2.5 py-1 bg-brandgreen/10 border border-brandgreen/30 text-brandgreen rounded text-xs font-bold uppercase tracking-wide mb-2 inline-block" id="m-step-badge">Tahap 1</span>
+                            <h4 class="text-base font-extrabold text-white mb-2" id="m-step-title">Analisis Potensi dan Masalah</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed" id="m-step-desc">
+                                Melakukan analisis empiris terkait tingginya angka pengangguran lulusan muda dan minimnya pemetaan minat bakat yang adaptif di sekolah menengah.
+                            </p>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- TAB: ASESMEN MINAT BAKAT (SIMULASI KUIS RIASEC) -->
+                <div id="asesmen-tab" class="page-transition tab-content hidden space-y-6">
+                    <div class="glassmorphism p-8 rounded-3xl relative overflow-hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-black text-white">Simulasi Asesmen RIASEC</h2>
+                                <p class="text-xs text-slate-400">Jawab pertanyaan berikut dengan jujur berdasarkan ketertarikan Anda.</p>
+                            </div>
+                            <span class="text-xs font-bold px-3 py-1 bg-brandgreen/10 border border-brandgreen/30 text-brandgreen rounded-full" id="quiz-counter-text">Soal 1 dari 12</span>
+                        </div>
+
+                        <div class="quiz-progress mb-8">
+                            <div class="quiz-bar" id="quiz-progress-bar"></div>
+                        </div>
+
+                        <!-- Panel Pertanyaan -->
+                        <div class="bg-slate-950/60 p-8 rounded-2xl border border-white/5 mb-6 text-center" id="quiz-question-box">
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-6" id="quiz-question-text">Saya menyukai aktivitas yang melibatkan perakitan perangkat keras komputer atau komponen mekanis lainnya.</h3>
+                            
+                            <!-- Skala Kepuasan Likert -->
+                            <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 max-w-2xl mx-auto">
+                                <button onclick="answerQuiz(1)" class="p-3.5 rounded-xl border border-white/5 bg-slate-900/40 hover:bg-red-500/10 hover:border-red-500/30 text-xs font-bold text-slate-400 hover:text-red-400 transition-all duration-300">Sangat Tidak Suka</button>
+                                <button onclick="answerQuiz(2)" class="p-3.5 rounded-xl border border-white/5 bg-slate-900/40 hover:bg-orange-500/10 hover:border-orange-500/30 text-xs font-bold text-slate-400 hover:text-orange-400 transition-all duration-300">Tidak Suka</button>
+                                <button onclick="answerQuiz(3)" class="p-3.5 rounded-xl border border-white/5 bg-slate-900/40 hover:bg-slate-500/10 hover:border-slate-500/30 text-xs font-bold text-slate-400 hover:text-slate-300 transition-all duration-300">Netral</button>
+                                <button onclick="answerQuiz(4)" class="p-3.5 rounded-xl border border-white/5 bg-slate-900/40 hover:bg-blue-500/10 hover:border-blue-500/30 text-xs font-bold text-slate-400 hover:text-blue-400 transition-all duration-300">Suka</button>
+                                <button onclick="answerQuiz(5)" class="p-3.5 rounded-xl border border-white/5 bg-slate-900/40 hover:bg-brandgreen/10 hover:border-brandgreen/30 text-xs font-bold text-slate-400 hover:text-brandgreen transition-all duration-300">Sangat Suka</button>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center">
+                            <button onclick="prevQuiz()" class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all duration-300 flex items-center gap-2" id="quiz-prev-btn" disabled>
+                                <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                            </button>
+                            <button onclick="resetQuiz()" class="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-xl text-xs font-bold text-red-400 hover:text-white transition-all duration-300">
+                                Reset Kuis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: QUEST KETERAMPILAN -->
+                <div id="quests-tab" class="page-transition tab-content hidden space-y-6">
+                    <!-- Penjelasan Misi -->
+                    <div class="glassmorphism p-6 rounded-3xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h2 class="text-xl font-extrabold text-white">Misi Pengembangan Diri Harian (RIASEC Quests)</h2>
+                            <p class="text-xs text-slate-400 mt-1">Selesaikan misi mini di bawah ini berdasarkan minat bakat Anda untuk menambah pengalaman (XP) dan menaikkan level profil Anda.</p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="px-3 py-1 bg-brandgreen/10 border border-brandgreen/30 text-brandgreen rounded-full text-xs font-bold" id="quest-xp-badge">Misi Selesai: 0 / 6</span>
+                        </div>
+                    </div>
+
+                    <!-- Grid Misi -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="quest-cards-container">
+                        <!-- Misi Realistik -->
+                        <div class="glassmorphism p-6 rounded-3xl border-l-4 border-l-red-500 flex flex-col justify-between" id="quest-card-r">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="px-2.5 py-1 bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg text-[10px] font-extrabold uppercase">R - Realistic</span>
+                                    <span class="text-xs font-bold text-brandgold flex items-center gap-1"><i class="fa-solid fa-star"></i> +50 XP</span>
+                                </div>
+                                <h3 class="text-base font-extrabold text-white mb-2">Simulasi Perbaikan Sirkuit</h3>
+                                <p class="text-xs text-slate-400 mb-4 leading-relaxed">Pilihlah salah satu alat yang paling sesuai untuk menyatukan dua buah kabel tembaga yang putus agar aliran listrik kembali tersambung sempurna.</p>
+                                
+                                <div class="space-y-2" id="quest-options-r">
+                                    <button onclick="answerQuest('r', 'Solder Listrik', true)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">A. Solder Listrik & Timah</button>
+                                    <button onclick="answerQuest('r', 'Obeng Kembang', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">B. Obeng Kembang & Sekrup</button>
+                                    <button onclick="answerQuest('r', 'Gunting Kertas', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">C. Gunting Kertas & Selotip Kertas</button>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400" id="quest-status-r">
+                                <span>Status: <strong class="text-orange-400">Belum Selesai</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Misi Investigatif -->
+                        <div class="glassmorphism p-6 rounded-3xl border-l-4 border-l-cyan-500 flex flex-col justify-between" id="quest-card-i">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="px-2.5 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 rounded-lg text-[10px] font-extrabold uppercase">I - Investigative</span>
+                                    <span class="text-xs font-bold text-brandgold flex items-center gap-1"><i class="fa-solid fa-star"></i> +50 XP</span>
+                                </div>
+                                <h3 class="text-base font-extrabold text-white mb-2">Analisis Pola Data Logis</h3>
+                                <p class="text-xs text-slate-400 mb-4 leading-relaxed">Urutan barisan angka yang logis adalah: 2, 4, 8, 16, ... Berapakah angka berikutnya yang paling logis secara matematis?</p>
+                                
+                                <div class="space-y-2" id="quest-options-i">
+                                    <button onclick="answerQuest('i', '20', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">A. 20</button>
+                                    <button onclick="answerQuest('i', '24', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">B. 24</button>
+                                    <button onclick="answerQuest('i', '32', true)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">C. 32</button>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400" id="quest-status-i">
+                                <span>Status: <strong class="text-orange-400">Belum Selesai</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Misi Artistik -->
+                        <div class="glassmorphism p-6 rounded-3xl border-l-4 border-l-purple-500 flex flex-col justify-between" id="quest-card-a">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="px-2.5 py-1 bg-purple-500/10 border border-purple-500/30 text-purple-400 rounded-lg text-[10px] font-extrabold uppercase">A - Artistic</span>
+                                    <span class="text-xs font-bold text-brandgold flex items-center gap-1"><i class="fa-solid fa-star"></i> +50 XP</span>
+                                </div>
+                                <h3 class="text-base font-extrabold text-white mb-2">Desain Komposisi Visual</h3>
+                                <p class="text-xs text-slate-400 mb-4 leading-relaxed">Dalam mendesain sebuah poster minimalis premium, elemen manakah yang sebaiknya Anda prioritaskan terlebih dahulu?</p>
+                                
+                                <div class="space-y-2" id="quest-options-a">
+                                    <button onclick="answerQuest('a', 'Kontras & Ruang Kosong', true)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">A. Keseimbangan kontras dan pemanfaatan ruang kosong (whitespace)</button>
+                                    <button onclick="answerQuest('a', 'Warna Sebanyak Mungkin', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">B. Menambahkan sebanyak mungkin variasi warna cerah dan elemen dekorasi</button>
+                                    <button onclick="answerQuest('a', 'Teks Padat', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">C. Memasukkan paragraf tulisan yang sangat padat untuk menjelaskan detail gambar</button>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400" id="quest-status-a">
+                                <span>Status: <strong class="text-orange-400">Belum Selesai</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Misi Sosial -->
+                        <div class="glassmorphism p-6 rounded-3xl border-l-4 border-l-emerald-500 flex flex-col justify-between" id="quest-card-s">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-[10px] font-extrabold uppercase">S - Social</span>
+                                    <span class="text-xs font-bold text-brandgold flex items-center gap-1"><i class="fa-solid fa-star"></i> +50 XP</span>
+                                </div>
+                                <h3 class="text-base font-extrabold text-white mb-2">Konseling Empati Siswa</h3>
+                                <p class="text-xs text-slate-400 mb-4 leading-relaxed">Jika seorang teman bercerita bahwa ia sangat cemas menghadapi ujian, respon komunikasi empatik mana yang paling tepat diberikan?</p>
+                                
+                                <div class="space-y-2" id="quest-options-s">
+                                    <button onclick="answerQuest('s', 'Abaikan Saja', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">A. "Ah, kamu terlalu berlebihan. Saya saja biasa-biasa saja tuh."</button>
+                                    <button onclick="answerQuest('s', 'Dengar & Validasi', true)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">B. "Aku paham kecemasanmu. Wajar kok merasa begitu, mau kita belajar bersama?"</button>
+                                    <button onclick="answerQuest('s', 'Langsung Kritik', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">C. "Makanya dari kemarin belajar, jangan main game terus-menerus."</button>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400" id="quest-status-s">
+                                <span>Status: <strong class="text-orange-400">Belum Selesai</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Misi Enterprising -->
+                        <div class="glassmorphism p-6 rounded-3xl border-l-4 border-l-amber-500 flex flex-col justify-between" id="quest-card-e">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-lg text-[10px] font-extrabold uppercase">E - Enterprising</span>
+                                    <span class="text-xs font-bold text-brandgold flex items-center gap-1"><i class="fa-solid fa-star"></i> +50 XP</span>
+                                </div>
+                                <h3 class="text-base font-extrabold text-white mb-2">Strategi Pitching Produk Premium</h3>
+                                <p class="text-xs text-slate-400 mb-4 leading-relaxed">Anda meluncurkan tumbler ramah lingkungan seharga Rp 200.000. Sudut pandang promosi (angle) manakah yang paling bernilai tinggi?</p>
+                                
+                                <div class="space-y-2" id="quest-options-e">
+                                    <button onclick="answerQuest('e', 'Murah Meriah', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">A. Mengatakan bahwa ini adalah botol air minum termurah sejagat raya.</button>
+                                    <button onclick="answerQuest('e', 'Gaya Hidup & Nilai', true)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">B. Menekankan kontribusi pelestarian bumi dan keawetan suhu air minum hingga 24 jam.</button>
+                                    <button onclick="answerQuest('e', 'Hanya Menunjukkan Gambar', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">C. Memaksa pembeli membeli hari ini juga tanpa memberikan rincian fungsi produk.</button>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400" id="quest-status-e">
+                                <span>Status: <strong class="text-orange-400">Belum Selesai</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Misi Konvensional -->
+                        <div class="glassmorphism p-6 rounded-3xl border-l-4 border-l-blue-500 flex flex-col justify-between" id="quest-card-c">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="px-2.5 py-1 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-lg text-[10px] font-extrabold uppercase">C - Conventional</span>
+                                    <span class="text-xs font-bold text-brandgold flex items-center gap-1"><i class="fa-solid fa-star"></i> +50 XP</span>
+                                </div>
+                                <h3 class="text-base font-extrabold text-white mb-2">Penataan Arsip & Data Digital</h3>
+                                <p class="text-xs text-slate-400 mb-4 leading-relaxed">Metode manakah yang paling efisien untuk menata file laporan bulanan di dalam harddisk internal agar mudah dicari di masa depan?</p>
+                                
+                                <div class="space-y-2" id="quest-options-c">
+                                    <button onclick="answerQuest('c', 'Satu Folder Acak', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">A. Membiarkan seluruh file menumpuk di folder "Downloads" secara acak.</button>
+                                    <button onclick="answerQuest('c', 'Sistematis Tanggal', true)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">B. Mengelompokkan berdasarkan Folder "Tahun > Bulan > Kategori_File" secara konsisten.</button>
+                                    <button onclick="answerQuest('c', 'Ganti Nama Acak', false)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 hover:bg-slate-800 transition-all">C. Memberi nama file menggunakan simbol unik acak tanpa folder khusus.</button>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400" id="quest-status-c">
+                                <span>Status: <strong class="text-orange-400">Belum Selesai</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: RIWAYAT & ANALISIS -->
+                <div id="riwayat-tab" class="page-transition tab-content hidden space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Chart Balok Holland Codes (Visualisasi Menawan) -->
+                        <div class="glassmorphism p-6 rounded-3xl lg:col-span-2">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-lg font-extrabold text-white">Visualisasi Profil Minat RIASEC</h3>
+                                    <p class="text-xs text-slate-400">Grafik dinamis berdasarkan hasil kuis Anda saat ini.</p>
+                                </div>
+                                <span class="text-xs font-bold text-brandgreen bg-brandgreen/10 border border-brandgreen/30 px-2.5 py-1 rounded-full uppercase" id="dominant-code-badge">Kode: R-I-A</span>
+                            </div>
+
+                            <!-- Arena Chart Bar -->
+                            <div class="chart-grid">
+                                <div class="chart-bar-wrap">
+                                    <div class="chart-bar-container">
+                                        <div id="bar-r" class="chart-bar bg-red-500" style="height: 0%;"></div>
+                                    </div>
+                                    <span class="chart-label">R</span>
+                                </div>
+                                <div class="chart-bar-wrap">
+                                    <div class="chart-bar-container">
+                                        <div id="bar-i" class="chart-bar bg-cyan-500" style="height: 0%;"></div>
+                                    </div>
+                                    <span class="chart-label">I</span>
+                                </div>
+                                <div class="chart-bar-wrap">
+                                    <div class="chart-bar-container">
+                                        <div id="bar-a" class="chart-bar bg-purple-500" style="height: 0%;"></div>
+                                    </div>
+                                    <span class="chart-label">A</span>
+                                </div>
+                                <div class="chart-bar-wrap">
+                                    <div class="chart-bar-container">
+                                        <div id="bar-s" class="chart-bar bg-emerald-500" style="height: 0%;"></div>
+                                    </div>
+                                    <span class="chart-label">S</span>
+                                </div>
+                                <div class="chart-bar-wrap">
+                                    <div class="chart-bar-container">
+                                        <div id="bar-e" class="chart-bar bg-amber-500" style="height: 0%;"></div>
+                                    </div>
+                                    <span class="chart-label">E</span>
+                                </div>
+                                <div class="chart-bar-wrap">
+                                    <div class="chart-bar-container">
+                                        <div id="bar-c" class="chart-bar bg-blue-500" style="height: 0%;"></div>
+                                    </div>
+                                    <span class="chart-label">C</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 mt-4 text-center">
+                                <div class="bg-slate-900/50 p-2 rounded-xl border border-white/5"><p class="text-[10px] text-slate-400 font-bold uppercase">R</p><p class="text-xs font-black text-red-400" id="val-r">0%</p></div>
+                                <div class="bg-slate-900/50 p-2 rounded-xl border border-white/5"><p class="text-[10px] text-slate-400 font-bold uppercase">I</p><p class="text-xs font-black text-cyan-400" id="val-i">0%</p></div>
+                                <div class="bg-slate-900/50 p-2 rounded-xl border border-white/5"><p class="text-[10px] text-slate-400 font-bold uppercase">A</p><p class="text-xs font-black text-purple-400" id="val-a">0%</p></div>
+                                <div class="bg-slate-900/50 p-2 rounded-xl border border-white/5"><p class="text-[10px] text-slate-400 font-bold uppercase">S</p><p class="text-xs font-black text-emerald-400" id="val-s">0%</p></div>
+                                <div class="bg-slate-900/50 p-2 rounded-xl border border-white/5"><p class="text-[10px] text-slate-400 font-bold uppercase">E</p><p class="text-xs font-black text-amber-400" id="val-e">0%</p></div>
+                                <div class="bg-slate-900/50 p-2 rounded-xl border border-white/5"><p class="text-[10px] text-slate-400 font-bold uppercase">C</p><p class="text-xs font-black text-blue-400" id="val-c">0%</p></div>
+                            </div>
+                        </div>
+
+                        <!-- Panel Detail Tipe Karakter Dominan -->
+                        <div class="glassmorphism p-6 rounded-3xl flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-lg font-extrabold text-white mb-2">Saran Eksplorasi</h3>
+                                <p class="text-xs text-slate-400 mb-4 leading-relaxed" id="dominant-summary-desc">Lakukan kuis evaluasi terlebih dahulu untuk memunculkan saran karir serta rekomendasi digital yang presisi bagi masa depan Anda.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-slate-950/60 border border-white/5 rounded-2xl">
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Rekomendasi Utama</p>
+                                <p class="text-sm font-extrabold text-brandgreen" id="rec-career-field">Belum Ada Data</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Riwayat Aktivitas & Quest Log -->
+                    <div class="glassmorphism p-6 rounded-3xl">
+                        <h3 class="text-lg font-extrabold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-list-check text-brandgreen"></i> Riwayat Aktivitas</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-white/10 text-slate-400 text-xs uppercase tracking-widest">
+                                        <th class="pb-3 font-bold">Nama Kegiatan</th>
+                                        <th class="pb-3 font-bold">Jenis / Tipe</th>
+                                        <th class="pb-3 font-bold">XP Diperoleh</th>
+                                        <th class="pb-3 font-bold">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="activity-log-body" class="text-xs text-slate-300 divide-y divide-white/5">
+                                    <tr>
+                                        <td class="py-3" colspan="4">Belum ada aktivitas yang tercatat. Silakan lakukan asesmen atau selesaikan quest.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: DASHBOARD KONSELOR (INTEGRASI AI PREMIUM) -->
+                <div id="konselor-tab" class="page-transition tab-content hidden space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Panel Ringkasan Metrik Konselor -->
+                        <div class="glassmorphism p-6 rounded-3xl lg:col-span-1 space-y-4">
+                            <h3 class="text-lg font-extrabold text-white mb-2">Metrik Karir Saya</h3>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-slate-950/40 p-5 rounded-2xl border border-white/5 flex justify-between items-center">
+                                    <div>
+                                        <p class="text-[10px] text-slate-400 font-bold uppercase mb-1">Total Misi</p>
+                                        <p class="text-2xl font-black text-brandblue" id="counselor-metrics-missions">0</p>
+                                    </div>
+                                    <div class="w-10 h-10 rounded-xl bg-brandblue/10 flex items-center justify-center text-brandblue">
+                                        <i class="fa-solid fa-list-check"></i>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-950/40 p-5 rounded-2xl border border-white/5 flex justify-between items-center">
+                                    <div>
+                                        <p class="text-[10px] text-slate-400 font-bold uppercase mb-1">Kesiapan Karir</p>
+                                        <p class="text-2xl font-black text-brandgreen" id="counselor-metrics-readiness">0%</p>
+                                    </div>
+                                    <div class="w-10 h-10 rounded-xl bg-brandgreen/10 flex items-center justify-center text-brandgreen">
+                                        <i class="fa-solid fa-gauge-high"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ruang Konsultasi AI Gemini Premium -->
+                        <div class="glassmorphism p-6 rounded-3xl lg:col-span-2 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <div>
+                                        <span class="px-2.5 py-1 bg-brandblue/10 border border-brandblue/30 text-brandblue rounded-full text-[10px] font-extrabold uppercase tracking-wide">Eksklusif: AI Career Guidance</span>
+                                        <h3 class="text-lg font-black text-white mt-1.5">Konsultan Karir Pintar TerasMindset</h3>
+                                    </div>
+                                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-brandgreen to-brandblue flex items-center justify-center text-white text-xs animate-pulse">
+                                        <i class="fa-solid fa-brain"></i>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                    Sistem kami mendeteksi perolehan Holland Codes dan penyelesaian quest Anda secara dinamis. Klik tombol di bawah ini untuk meminta saran bimbingan belajar, karir masa depan, serta roadmap kesiapan kerja yang dipersonalisasi khusus menggunakan kecerdasan buatan **Gemini 2.5 Flash**.
+                                </p>
+                            </div>
+
+                            <!-- Wadah Respon AI -->
+                            <div class="bg-slate-950/60 border border-white/5 rounded-2xl p-4 min-h-[140px] text-xs text-slate-300 mb-4 overflow-y-auto leading-relaxed whitespace-pre-wrap" id="ai-response-box">
+                                <div class="flex flex-col items-center justify-center h-full text-center text-slate-500 py-6" id="ai-placeholder">
+                                    <i class="fa-solid fa-comment-dots text-3xl mb-2"></i>
+                                    <p>Saran konsultasi AI belum dibuat. Klik tombol di bawah untuk menganalisis data bakat Anda secara instan.</p>
+                                </div>
+                            </div>
+
+                            <button onclick="requestAIConsultation()" id="ai-consult-btn" class="w-full py-3.5 bg-gradient-to-r from-brandgreen to-brandblue hover:from-emerald-500 hover:to-blue-600 rounded-xl font-extrabold text-sm text-white flex items-center justify-center gap-2 shadow-lg transition-all">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Hubungkan data & Generate Rekomendasi AI
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- FOOTER INFORMASI -->
+    <footer class="mt-auto py-6 border-t border-white/5 text-center text-slate-500 text-xs">
+        <p>&copy; 2026 TerasMindset. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p class="text-[10px] text-slate-600 mt-1">Dikembangkan khusus sebagai media pembelajaran inovatif dan simulasi pemetaan bakat interaktif.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC & GAMIFICATION ENGINE -->
+    <script>
+        // Data internal State Management
+        let userProfile = {
+            name: "Siswa Tamu",
+            email: "guest@terasmindset.id",
+            level: 1,
+            xp: 0,
+            xpToNext: 100,
+            riasecScores: { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 },
+            completedQuests: { r: false, i: false, a: false, s: false, e: false, c: false },
+            activities: [],
+            isQuizCompleted: false
+        };
+
+        // Kumpulan Pertanyaan Kuis RIASEC (12 Pertanyaan, 2 per dimensi)
+        const quizQuestions = [
+            { text: "Saya menyukai aktivitas merakit barang, membetulkan alat elektronik, atau bekerja dengan mesin praktis.", type: "R" },
+            { text: "Saya merasa puas jika berhasil menyelesaikan teka-teki logika yang rumit atau soal matematika.", type: "I" },
+            { text: "Saya suka menuangkan imajinasi saya dalam bentuk gambar, desain grafis, tulisan kreatif, atau musik.", type: "A" },
+            { text: "Saya sangat senang mendengarkan keluh kesah teman lalu membantunya menemukan solusi damai.", type: "S" },
+            { text: "Saya berambisi memimpin diskusi kelompok, menawarkan ide baru, atau meyakinkan orang lain.", type: "E" },
+            { text: "Saya sangat suka menyortir file ke dalam folder-folder terstruktur agar selalu rapi dan mudah dicari.", type: "C" },
+            { text: "Saya lebih menikmati bekerja di luar ruangan dengan alat fisik dibandingkan bekerja seharian di depan meja kantor.", type: "R" },
+            { text: "Saya sangat gemar membaca ensiklopedia ilmiah, meneliti fenomena alam, atau mempelajari astronomi.", type: "I" },
+            { text: "Saya sering membuat rancangan orisinal dan kurang menyukai instruksi pekerjaan yang terlalu kaku.", type: "A" },
+            { text: "Saya senang terlibat aktif dalam aksi sosial, kerelawanan, atau menyebarkan pesan perdamaian.", type: "S" },
+            { text: "Saya berminat merintis sebuah usaha komersial (bisnis) skala kecil dan mengelola pemasarannya.", type: "E" },
+            { text: "Saya suka menganalisis data angka, mencatat laporan pengeluaran keuangan, atau menata dokumen resmi.", type: "C" }
+        ];
+
+        let currentQuizIndex = 0;
+        let quizAnswers = Array(quizQuestions.length).fill(0);
+
+        // Deskripsi Detail Landasan Teori RIASEC
+        const riasecDetails = [
+            {
+                char: "R",
+                badge: "Realistic",
+                title: "Tipe Praktikal & Fisikal (The Doers)",
+                color: "red",
+                desc: "Menyukai aktivitas praktis yang melibatkan pengerjaan fisik, perkakas, mesin, atau bekerja di luar ruangan. Orang dengan tipe ini cenderung kuat dalam kemampuan mekanik, atletis, dan lebih memilih bekerja dengan benda nyata daripada ide atau interaksi sosial yang kompleks."
+            },
+            {
+                char: "I",
+                badge: "Investigative",
+                title: "Tipe Analitis & Saintifik (The Thinkers)",
+                color: "cyan",
+                desc: "Sangat tertarik pada aktivitas yang membutuhkan pemecahan masalah secara logis, ilmiah, penelitian mendalam, serta pengamatan teoretis. Cenderung kritis, teliti, mandiri, serta menyukai matematika, sains, dan eksplorasi ilmu pengetahuan murni."
+            },
+            {
+                char: "A",
+                badge: "Artistic",
+                title: "Tipe Kreatif & Imajinatif (The Creators)",
+                color: "purple",
+                desc: "Menghargai kebebasan berekspresi, orisinalitas, dan kreativitas tinggi tanpa batas instruksi kaku. Sangat menonjol dalam bidang seni visual, musik, sastra penulisan, drama, serta menyukai segala bentuk perancangan estetika yang tidak terstruktur."
+            },
+            {
+                char: "S",
+                badge: "Social",
+                title: "Tipe Humanis & Peduli Sesama (The Helpers)",
+                color: "emerald",
+                desc: "Menyukai pekerjaan yang berorientasi pada manusia seperti mendidik, melatih, merawat, menolong, atau menyembuhkan. Orang dengan tipe sosial memiliki tingkat empati yang tinggi, bersikap ramah, kooperatif, serta pandai berkomunikasi interpersonal."
+            },
+            {
+                char: "E",
+                badge: "Enterprising",
+                title: "Tipe Persuasif & Kompetitif (The Persuaders)",
+                color: "amber",
+                desc: "Memiliki minat kuat dalam memimpin orang lain, berwirausaha, menjual produk, serta memengaruhi opini publik demi mencapai target organisasi atau finansial. Cenderung dinamis, ambisius, penuh percaya diri, dan berani mengambil risiko finansial."
+            },
+            {
+                char: "C",
+                badge: "Conventional",
+                title: "Tipe Terorganisir & Detail (The Organizers)",
+                color: "blue",
+                desc: "Sangat menyukai keteraturan, analisis data, pencatatan keuangan, dan bekerja sesuai aturan atau petunjuk sistematis yang tertata rapi. Memiliki akurasi kerja tinggi, andal, metodis, serta terbiasa menjaga kelancaran operasional administrasi."
+            }
+        ];
+
+        // Deskripsi Detail Langkah Metodologi Borg & Gall
+        const methodologyDetails = [
+            {
+                step: "Tahap 1",
+                title: "Analisis Potensi dan Masalah",
+                desc: "Melakukan identifikasi primer di lapangan terkait tingginya angka pengangguran terbuka lulusan muda serta minimnya fasilitas eksplorasi minat bakat mandiri yang interaktif dan menyenangkan."
+            },
+            {
+                step: "Tahap 2",
+                title: "Pengumpulan Data & Studi Literatur",
+                desc: "Mempelajari kerangka teori Holland Codes (RIASEC) secara mendalam, serta meninjau riset fungsionalisme struktural guna menyinkronkan kebutuhan psikologi remaja dengan platform modern."
+            },
+            {
+                step: "Tahap 3",
+                title: "Perancangan Desain Produk",
+                desc: "Membuat prototipe platform interaktif TerasMindset, merancang skenario gamifikasi mini-quest, serta menyusun algoritma kalkulasi skor profil minat berbasis evaluasi persentase."
+            },
+            {
+                step: "Tahap 4",
+                title: "Uji Validasi Ahli & Revisi",
+                desc: "Mengundang ahli materi bimbingan konseling dan ahli teknologi pendidikan untuk mengevaluasi kegunaan sistem, kemudian melakukan revisi desain UI/UX berdasarkan rekomendasi masukan."
+            },
+            {
+                step: "Tahap 5",
+                title: "Uji Pemakaian & Produk Akhir",
+                desc: "Mengimplementasikan platform kepada sekelompok pelajar secara terbimbing, memvalidasi kepuasan pengguna, dan mempublikasikan produk akhir TerasMindset sebagai solusi adaptasi transisi karir."
+            }
+        ];
+
+        // MENYIAPKAN SCREEN AWAL
+        window.onload = function() {
+            // Cek session local storage jika ada sebelum loader menghilang
+            const savedProfile = localStorage.getItem('teras_profile');
+            if (savedProfile) {
+                userProfile = JSON.parse(savedProfile);
+                showMainApp(true); // Langsung tampilkan dashboard & sembunyikan auth-wall instan
+            }
+
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.classList.add('opacity-0');
+                setTimeout(() => loader.classList.add('hidden'), 700);
+            }, 1000);
+            
+            // Inisialisasi tampilan awal
+            updateGamificationWidgets();
+            updateChartDisplay();
+        };
+
+        // KONTROL GERBANG MASUK (AUTH WALL)
+        let authMode = 'signup';
+        function setAuthWallMode(mode) {
+            authMode = mode;
+            const tabSignup = document.getElementById('wall-tab-signup');
+            const tabLogin = document.getElementById('wall-tab-login');
+            const nameField = document.getElementById('wall-field-name');
+            const submitBtn = document.getElementById('wall-submit-btn');
+            const title = document.getElementById('auth-wall-title');
+
+            if (mode === 'signup') {
+                tabSignup.className = 'py-2.5 rounded-lg text-xs font-bold transition-all duration-300 bg-brandgreen text-white';
+                tabLogin.className = 'py-2.5 rounded-lg text-xs font-bold transition-all duration-300 text-slate-400 hover:text-white';
+                nameField.classList.remove('hidden');
+                document.getElementById('wall-name').required = true;
+                title.innerText = 'Daftar Akun TerasMindset';
+                submitBtn.innerText = 'Daftar & Masuk Dashboard';
+            } else {
+                tabSignup.className = 'py-2.5 rounded-lg text-xs font-bold transition-all duration-300 text-slate-400 hover:text-white';
+                tabLogin.className = 'py-2.5 rounded-lg text-xs font-bold transition-all duration-300 bg-brandgreen text-white';
+                nameField.classList.add('hidden');
+                document.getElementById('wall-name').required = false;
+                title.innerText = 'Selamat Datang Kembali';
+                submitBtn.innerText = 'Masuk & Sinkronisasi';
+            }
+        }
+
+        function handleAuthWallSubmit(e) {
+            e.preventDefault();
+            const nameVal = document.getElementById('wall-name').value.trim();
+            const emailVal = document.getElementById('wall-email').value.trim();
+            const passVal = document.getElementById('wall-password').value;
+            const errorMsg = document.getElementById('wall-error-msg');
+
+            if (authMode === 'signup' && !nameVal) {
+                errorMsg.innerText = "Mohon isi nama lengkap Anda.";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            // Mock login/signup sukses
+            userProfile.name = authMode === 'signup' ? nameVal : (nameVal || "Siswa Berbakat");
+            userProfile.email = emailVal;
+            
+            // Tambah aktivitas awal
+            logActivity("Pendaftaran Akun", "Sistem", 10, "Berhasil");
+            addXP(20);
+
+            // Simpan ke local storage
+            localStorage.setItem('teras_profile', JSON.stringify(userProfile));
+
+            // Tampilkan Modal Sambutan
+            showCustomModal("fa-user-astronaut", "Otentikasi Berhasil!", `Selamat datang di TerasMindset, ${userProfile.name}. Mari kita mulai perjalanan eksplorasi bakat masa depan Anda.`);
+
+            showMainApp(false); // Transisi transparan halus karena baru mendaftar
+        }
+
+        function showMainApp(immediate = false) {
+            const authWall = document.getElementById('auth-wall');
+            if (immediate) {
+                authWall.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+            } else {
+                authWall.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => authWall.classList.add('hidden'), 500);
+            }
+
+            const mainApp = document.getElementById('main-app');
+            mainApp.classList.remove('hidden');
+            if (immediate) {
+                mainApp.classList.add('opacity-100');
+            } else {
+                setTimeout(() => mainApp.classList.add('opacity-100'), 50);
+            }
+
+            // Update isi UI
+            document.getElementById('sidebar-user-name').innerText = userProfile.name;
+            document.getElementById('sidebar-user-email').innerText = userProfile.email;
+            
+            updateGamificationWidgets();
+            updateChartDisplay();
+            updateQuestsUI();
+            renderActivityLog();
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('teras_profile');
+            location.reload();
+        }
+
+        // KONTROL TRANSISI TAB UTAMA
+        function switchTab(tabId) {
+            // Sembunyikan semua tab content
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            // Tampilkan tab terpilih
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
+            }
+
+            // Reset class active pada semua tombol navigasi sidebar
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300";
+            });
+
+            // Aktifkan tombol yang bersesuaian jika bukan asesmen-tab
+            let activeBtnId = 'btn-' + tabId;
+            if (tabId === 'asesmen-tab') {
+                activeBtnId = 'btn-proposal-tab'; // Tetap sorot proposal sebagai induk asesmen
+            }
+            const activeBtn = document.getElementById(activeBtnId);
+            if (activeBtn) {
+                activeBtn.className = "tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-white bg-brandgreen/10 transition-all duration-300";
+            }
+
+            // Khusus tab riwayat, trigger render grafik bar
+            if (tabId === 'riwayat-tab') {
+                setTimeout(updateChartDisplay, 100);
+            }
+        }
+
+        // TOGGLE COLLAPSIBLE BANNER PROPOSAL
+        let isDescOpen = false;
+        function toggleProposalDescription() {
+            isDescOpen = !isDescOpen;
+            const block = document.getElementById('proposal-desc-block');
+            const icon = document.getElementById('desc-icon');
+            const text = document.getElementById('desc-btn-text');
+
+            if (isDescOpen) {
+                block.style.maxHeight = "500px";
+                icon.className = "fa-solid fa-circle-chevron-up text-brandgreen transition-all";
+                text.innerText = "Tutup Deskripsi Platform";
+            } else {
+                block.style.maxHeight = "0px";
+                icon.className = "fa-solid fa-circle-info text-brandblue transition-all";
+                text.innerText = "Buka Deskripsi Platform";
+            }
+        }
+
+        // KONTROL STEP LANDASAN TEORI RIASEC
+        function selectRiasecStep(index) {
+            // Hapus class active semua tombol
+            document.querySelectorAll('.r-step-btn').forEach((btn, i) => {
+                btn.className = "r-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-sm transition-all duration-300 flex flex-col items-center justify-center gap-1 text-center";
+            });
+
+            // Set active tombol terpilih
+            const activeData = riasecDetails[index];
+            const activeBtn = document.getElementById(`rbtn-${index}`);
+            
+            // Definisikan warna border/bg active
+            let activeClasses = "";
+            if (activeData.color === 'red') activeClasses = "border-red-500/30 bg-red-500/10 text-red-400 shadow-lg shadow-red-500/5";
+            if (activeData.color === 'cyan') activeClasses = "border-cyan-500/30 bg-cyan-500/10 text-cyan-400 shadow-lg shadow-cyan-500/5";
+            if (activeData.color === 'purple') activeClasses = "border-purple-500/30 bg-purple-500/10 text-purple-400 shadow-lg shadow-purple-500/5";
+            if (activeData.color === 'emerald') activeClasses = "border-emerald-500/30 bg-emerald-500/10 text-emerald-400 shadow-lg shadow-emerald-500/5";
+            if (activeData.color === 'amber') activeClasses = "border-amber-500/30 bg-amber-500/10 text-amber-400 shadow-lg shadow-amber-500/5";
+            if (activeData.color === 'blue') activeClasses = "border-blue-500/30 bg-blue-500/10 text-blue-400 shadow-lg shadow-blue-500/5";
+
+            activeBtn.className = `r-step-btn p-3.5 rounded-2xl border font-bold text-sm transition-all duration-300 flex flex-col items-center justify-center gap-1 text-center ${activeClasses}`;
+
+            // Ganti isi panel deskripsi dengan efek transisi halus
+            const panel = document.getElementById('riasec-description-panel');
+            panel.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                document.getElementById('r-bg-char').innerText = activeData.char;
+                
+                const badge = document.getElementById('r-step-badge');
+                badge.innerText = activeData.badge;
+                badge.className = `px-2.5 py-1 rounded text-xs font-bold uppercase tracking-wide mb-2 inline-block bg-${activeData.color}-500/10 border border-${activeData.color}-500/30 text-${activeData.color}-400`;
+                
+                document.getElementById('r-step-title').innerText = activeData.title;
+                document.getElementById('r-step-desc').innerText = activeData.desc;
+                
+                panel.classList.remove('opacity-0', 'scale-95');
+            }, 200);
+        }
+
+        // KONTROL STEP METODOLOGI BORG & GALL
+        function selectMethodologyStep(index) {
+            document.querySelectorAll('.m-step-btn').forEach((btn, i) => {
+                btn.className = "m-step-btn p-3.5 rounded-2xl border border-white/5 bg-slate-900/40 text-slate-400 hover:text-white hover:border-white/10 font-bold text-xs transition-all duration-300 flex flex-col items-center justify-center gap-2 text-center";
+            });
+
+            const activeBtn = document.getElementById(`mbtn-${index}`);
+            activeBtn.className = "m-step-btn p-3.5 rounded-2xl border border-brandgreen/30 bg-brandgreen/10 text-brandgreen font-bold text-xs transition-all duration-300 flex flex-col items-center justify-center gap-2 text-center shadow-lg shadow-brandgreen/5";
+
+            const methodPanel = document.getElementById('method-description-panel');
+            methodPanel.classList.add('opacity-0');
+
+            setTimeout(() => {
+                const activeData = methodologyDetails[index];
+                document.getElementById('m-step-badge').innerText = activeData.step;
+                document.getElementById('m-step-title').innerText = activeData.title;
+                document.getElementById('m-step-desc').innerText = activeData.desc;
+
+                methodPanel.classList.remove('opacity-0');
+            }, 200);
+        }
+
+        // JALANNYA SIMULASI KUIS EVALUASI RIASEC
+        function updateQuizUI() {
+            const currentQ = quizQuestions[currentQuizIndex];
+            document.getElementById('quiz-counter-text').innerText = `Soal ${currentQuizIndex + 1} dari ${quizQuestions.length}`;
+            document.getElementById('quiz-question-text').innerText = currentQ.text;
+
+            // Update Progress bar
+            const percent = ((currentQuizIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${percent}%`;
+
+            // Kontrol tombol prev
+            const prevBtn = document.getElementById('quiz-prev-btn');
+            if (currentQuizIndex === 0) {
+                prevBtn.setAttribute('disabled', 'true');
+                prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                prevBtn.removeAttribute('disabled');
+                prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        function answerQuiz(value) {
+            // value dari Likert 1 s.d 5
+            quizAnswers[currentQuizIndex] = value;
+
+            if (currentQuizIndex < quizQuestions.length - 1) {
+                currentQuizIndex++;
+                updateQuizUI();
+            } else {
+                calculateQuizResults();
+            }
+        }
+
+        function prevQuiz() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                updateQuizUI();
+            }
+        }
+
+        function resetQuiz() {
+            currentQuizIndex = 0;
+            quizAnswers = Array(quizQuestions.length).fill(0);
+            updateQuizUI();
+        }
+
+        function calculateQuizResults() {
+            // Reset skor
+            let tempScores = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
+            
+            // Akumulasikan nilai jawaban berdasarkan tipe kuis (maksimal nilai per kategori = 2 soal * 5 = 10)
+            quizQuestions.forEach((q, idx) => {
+                const ansVal = quizAnswers[idx];
+                tempScores[q.type] += ansVal;
+            });
+
+            // Ubah ke persentase (nilai max 10, persentase = (skor / 10) * 100)
+            userProfile.riasecScores.R = Math.round((tempScores.R / 10) * 100);
+            userProfile.riasecScores.I = Math.round((tempScores.I / 10) * 100);
+            userProfile.riasecScores.A = Math.round((tempScores.A / 10) * 100);
+            userProfile.riasecScores.S = Math.round((tempScores.S / 10) * 100);
+            userProfile.riasecScores.E = Math.round((tempScores.E / 10) * 100);
+            userProfile.riasecScores.C = Math.round((tempScores.C / 10) * 100);
+
+            userProfile.isQuizCompleted = true;
+
+            // Tambahkan XP bonus penyelesaian
+            addXP(100);
+            logActivity("Penyelesaian Asesmen RIASEC", "Evaluasi", 100, "Selesai");
+
+            // Update local storage
+            localStorage.setItem('teras_profile', JSON.stringify(userProfile));
+
+            // Perbarui visual
+            updateChartDisplay();
+            
+            // Munculkan modal sukses
+            const dominant = getDominantCode();
+            showCustomModal("fa-award", "Evaluasi Selesai!", `Asesmen bakat Anda sukses dianalisis. Anda memiliki orientasi minat dominan pada tipe: ${dominant}. Silakan buka tab Riwayat & Analisis untuk ulasan lengkap.`);
+
+            // Kembalikan ke tab riwayat
+            switchTab('riwayat-tab');
+        }
+
+        // MEMPEROLEH KODE DOMINAN HOLLAND CODES
+        function getDominantCode() {
+            const scores = userProfile.riasecScores;
+            const sorted = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+            return sorted.slice(0, 3).join('-');
+        }
+
+        function getDominantTextAndSuggestions() {
+            const dominant = getDominantCode();
+            const scores = userProfile.riasecScores;
+            const highestVal = scores[dominant.split('-')[0]];
+
+            if (highestVal === 0) {
+                return {
+                    desc: "Silakan selesaikan kuis simulasi terlebih dahulu agar sistem mampu mengkalkulasikan kombinasi bakat Anda secara tepat.",
+                    rec: "Lakukan Simulasi Kuis Asesmen"
+                };
+            }
+
+            const primaryType = dominant.split('-')[0];
+            let description = "";
+            let recommendation = "";
+
+            switch (primaryType) {
+                case 'R':
+                    description = "Anda memiliki keahlian dominan pada dimensi Realistik (R). Anda sangat piawai menyatukan, memperbaiki, serta memodifikasi elemen fisik atau komponen mekanis.";
+                    recommendation = "Teknik Mekatronika, Pengembang Game, Arsitektur, atau Desain Produk Manufaktur.";
+                    break;
+                case 'I':
+                    description = "Analisis Anda luar biasa tajam (Tipe Investigatif). Menemukan jawaban saintifik, mengoleksi logika data, dan menyingkap hal-hal misterius adalah bakat alami Anda.";
+                    recommendation = "Data Scientist, Peneliti Laboratorium, AI Developer, atau Analis Riset Pasar.";
+                    break;
+                case 'A':
+                    description = "Jiwa kreasi orisinal Anda sungguh tak terbatas (Tipe Artistik). Anda unggul dalam mengekspresikan gagasan visual maupun tekstual dengan nilai estetika tinggi.";
+                    recommendation = "UI/UX Designer, Penulis Kreatif, Creative Director, atau Video Animator.";
+                    break;
+                case 'S':
+                    description = "Anda memiliki tingkat empati kemanusiaan yang sangat tinggi (Tipe Sosial). Kekuatan utama Anda terletak pada interaksi sosial yang sehat, mendidik, serta memedulikan sesama.";
+                    recommendation = "Psikolog Remaja, Konsultan HRD, Pengajar, atau Public Relations Specialist.";
+                    break;
+                case 'E':
+                    description = "Anda memiliki kharisma pemimpin alami (Tipe Enterprising). Berani mengambil keputusan strategis, andal dalam pitching, serta mampu memengaruhi audiens.";
+                    recommendation = "Wirausahawan Digital, Product Manager, Growth Marketer, atau Business Development.";
+                    break;
+                case 'C':
+                    description = "Sikap teliti dan terorganisir Anda sangat istimewa (Tipe Konvensional). Akurasi pengerjaan data, kepatuhan struktur, dan efisiensi arsip digital adalah modal kuat Anda.";
+                    recommendation = "Financial Analyst, Database Administrator, Project Coordinator, atau Risk Assessor.";
+                    break;
+            }
+
+            return { desc: description, rec: recommendation };
+        }
+
+        // UPDATE GRAFIK CHART BALOK
+        function updateChartDisplay() {
+            const scores = userProfile.riasecScores;
+
+            // Set tinggi bar
+            document.getElementById('bar-r').style.height = `${scores.R}%`;
+            document.getElementById('bar-i').style.height = `${scores.I}%`;
+            document.getElementById('bar-a').style.height = `${scores.A}%`;
+            document.getElementById('bar-s').style.height = `${scores.S}%`;
+            document.getElementById('bar-e').style.height = `${scores.E}%`;
+            document.getElementById('bar-c').style.height = `${scores.C}%`;
+
+            // Set nilai persentase text
+            document.getElementById('val-r').innerText = `${scores.R}%`;
+            document.getElementById('val-i').innerText = `${scores.I}%`;
+            document.getElementById('val-a').innerText = `${scores.A}%`;
+            document.getElementById('val-s').innerText = `${scores.S}%`;
+            document.getElementById('val-e').innerText = `${scores.E}%`;
+            document.getElementById('val-c').innerText = `${scores.C}%`;
+
+            // Set dominant badge
+            const dominant = getDominantCode();
+            if (scores.R === 0 && scores.I === 0 && scores.A === 0) {
+                document.getElementById('dominant-code-badge').innerText = "MENUNGGU ASESMEN";
+            } else {
+                document.getElementById('dominant-code-badge').innerText = `KODE: ${dominant}`;
+            }
+
+            // Set rekomendasi bimbingan
+            const summary = getDominantTextAndSuggestions();
+            document.getElementById('dominant-summary-desc').innerText = summary.desc;
+            document.getElementById('rec-career-field').innerText = summary.rec;
+
+            // Sinkronisasi metrik konselor
+            const totalDone = Object.values(userProfile.completedQuests).filter(Boolean).length;
+            document.getElementById('counselor-metrics-missions').innerText = `${totalDone} Misi`;
+            
+            // Hitung kesiapan karir
+            let readiness = 0;
+            if (userProfile.isQuizCompleted) readiness += 50;
+            readiness += Math.round((totalDone / 6) * 50);
+            document.getElementById('counselor-metrics-readiness').innerText = `${readiness}%`;
+        }
+
+        // KONTROL PENYELESAIAN MINI QUESTS HARIAN
+        function answerQuest(questType, answerText, isCorrect) {
+            if (userProfile.completedQuests[questType]) {
+                showCustomModal("fa-circle-info", "Misi Selesai", "Anda sudah menyelesaikan misi ini sebelumnya.");
+                return;
+            }
+
+            if (isCorrect) {
+                userProfile.completedQuests[questType] = true;
+                addXP(50);
+                logActivity(`Misi ${questType.toUpperCase()} - ${answerText}`, "Quest Keterampilan", 50, "Selesai");
+                
+                // Simpan ke local storage
+                localStorage.setItem('teras_profile', JSON.stringify(userProfile));
+
+                updateQuestsUI();
+                updateChartDisplay();
+
+                showCustomModal("fa-circle-check", "Jawaban Benar!", `Luar biasa, pilihan "${answerText}" bernilai tepat! Anda memperoleh +50 XP.`);
+            } else {
+                showCustomModal("fa-circle-xmark", "Kurang Tepat", `Pilihan "${answerText}" masih kurang optimal untuk misi ini. Silakan telaah kembali.`);
+            }
+        }
+
+        function updateQuestsUI() {
+            const types = ['r', 'i', 'a', 's', 'e', 'c'];
+            let totalDone = 0;
+
+            types.forEach(t => {
+                const isDone = userProfile.completedQuests[t];
+                const statusBox = document.getElementById(`quest-status-${t}`);
+                const card = document.getElementById(`quest-card-${t}`);
+                const options = document.getElementById(`quest-options-${t}`);
+
+                if (isDone) {
+                    totalDone++;
+                    statusBox.innerHTML = `<span>Status: <strong class="text-brandgreen">Telah Selesai <i class="fa-solid fa-circle-check"></i></strong></span>`;
+                    card.classList.add('bg-brandgreen/5');
+                    options.classList.add('opacity-50', 'pointer-events-none');
+                } else {
+                    statusBox.innerHTML = `<span>Status: <strong class="text-orange-400">Belum Selesai</strong></span>`;
+                    card.classList.remove('bg-brandgreen/5');
+                    options.classList.remove('opacity-50', 'pointer-events-none');
+                }
+            });
+
+            document.getElementById('quest-xp-badge').innerText = `Misi Selesai: ${totalDone} / 6`;
+        }
+
+        // SISTEM DYNAMIC GAMIFICATION XP & LEVEL UP
+        function addXP(amount) {
+            userProfile.xp += amount;
+            if (userProfile.xp >= userProfile.xpToNext) {
+                userProfile.xp -= userProfile.xpToNext;
+                userProfile.level += 1;
+                
+                // Trigger event level up premium
+                setTimeout(() => {
+                    showCustomModal("fa-award", "LEVEL UP!", `Selamat! Anda berhasil naik ke Level ${userProfile.level}. Terus selesaikan kuis & misi karir!`);
+                }, 800);
+            }
+            updateGamificationWidgets();
+        }
+
+        function updateGamificationWidgets() {
+            // Update Mini Widget Header
+            const rankText = getRankName(userProfile.level);
+            document.getElementById('widget-rank').innerText = `Level ${userProfile.level} ${rankText}`;
+            document.getElementById('widget-xp-text').innerText = `${userProfile.xp} / ${userProfile.xpToNext} XP`;
+            
+            const fillPercent = (userProfile.xp / userProfile.xpToNext) * 100;
+            document.getElementById('widget-xp-fill').style.width = `${fillPercent}%`;
+        }
+
+        function getRankName(lvl) {
+            if (lvl === 1) return "Rookie";
+            if (lvl === 2) return "Explorer";
+            if (lvl === 3) return "Innovator";
+            if (lvl === 4) return "Master";
+            return "Visionary";
+        }
+
+        // SISTEM RIWAYAT AKTIVITAS (LOG)
+        function logActivity(name, type, xp, status) {
+            const newAct = {
+                id: Date.now(),
+                name: name,
+                type: type,
+                xp: `+${xp} XP`,
+                status: status
+            };
+            userProfile.activities.unshift(newAct);
+            renderActivityLog();
+        }
+
+        function renderActivityLog() {
+            const tbody = document.getElementById('activity-log-body');
+            if (userProfile.activities.length === 0) {
+                tbody.innerHTML = `<tr><td class="py-3 text-center text-slate-500" colspan="4">Belum ada aktivitas. Selesaikan Kuis RIASEC atau Quest di atas!</td></tr>`;
+                return;
+            }
+
+            let html = "";
+            userProfile.activities.forEach(act => {
+                html += `
+                    <tr>
+                        <td class="py-3 font-semibold text-white">${act.name}</td>
+                        <td class="py-3 text-slate-400">${act.type}</td>
+                        <td class="py-3 text-brandgold font-bold">${act.xp}</td>
+                        <td class="py-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-brandgreen/10 text-brandgreen border border-brandgreen/20">${act.status}</span></td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        // MODAL NOTIFIKASI PREMIUM CUSTOM
+        function showCustomModal(iconName, title, msg) {
+            const modal = document.getElementById('custom-modal');
+            const box = document.getElementById('modal-box');
+            
+            document.getElementById('modal-icon').innerHTML = `<i class="fa-solid ${iconName} text-white"></i>`;
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = msg;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                box.classList.remove('scale-90');
+            }, 50);
+        }
+
+        function closeCustomModal() {
+            const modal = document.getElementById('custom-modal');
+            const box = document.getElementById('modal-box');
+
+            modal.classList.add('opacity-0');
+            box.classList.add('scale-90');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // INTEGRASI CONSULTAN AI GEMINI 2.5 FLASH (NON-STREAMING RETRIES & BACKOFF)
+        async function requestAIConsultation() {
+            const responseBox = document.getElementById('ai-response-box');
+            const btn = document.getElementById('ai-consult-btn');
+            
+            // Validasi asesmen
+            if (!userProfile.isQuizCompleted) {
+                showCustomModal("fa-circle-exclamation", "Kuis Belum Selesai", "Harap selesaikan kuis Asesmen Minat Bakat RIASEC terlebih dahulu agar AI memiliki pondasi data analisis yang akurat.");
+                return;
+            }
+
+            // Tampilkan status Loading premium di kotak respon
+            responseBox.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-full py-8 text-center text-slate-400">
+                    <div class="relative w-12 h-12 mb-3">
+                        <div class="absolute inset-0 rounded-full border-2 border-transparent border-t-brandgreen animate-spin"></div>
+                    </div>
+                    <p class="animate-pulse">Menghubungkan data minat ke sistem kognitif AI Gemini...</p>
+                </div>
+            `;
+            btn.setAttribute('disabled', 'true');
+            btn.classList.add('opacity-55', 'cursor-not-allowed');
+
+            const dominant = getDominantCode();
+            const scores = userProfile.riasecScores;
+            const completedMissionsCount = Object.values(userProfile.completedQuests).filter(Boolean).length;
+            
+            // Siapkan instruksi prompt untuk model Gemini
+            const systemPrompt = `Anda adalah seorang Konselor Karir Profesional Ahli khusus Remaja dan Pengembang Bakat di platform TerasMindset. Tugas Anda adalah memberikan ulasan karir yang cerdas, tajam, memotivasi, dan penuh rekomendasi praktis berdasarkan data minat Holland Codes (RIASEC) yang dikirimkan oleh pengguna. Jawablah menggunakan bahasa Indonesia yang ramah, profesional, mudah dicerna anak muda, terstruktur dengan poin-poin yang memukau.`;
+
+            const userQuery = `
+Halo Konselor AI, nama saya adalah ${userProfile.name}.
+Berikut adalah profil minat bakat Holland Codes (RIASEC) saya saat ini:
+- Realistic (R): ${scores.R}%
+- Investigative (I): ${scores.I}%
+- Artistic (A): ${scores.A}%
+- Social (S): ${scores.S}%
+- Enterprising (E): ${scores.E}%
+- Conventional (C): ${scores.C}%
+
+Kombinasi 3 Kode Dominan saya: ${dominant}.
+Saya telah menuntaskan ${completedMissionsCount} misi mini-quest dari total 6 bidang keterampilan hidup digital.
+
+Berdasarkan data tersebut, tolong bantu berikan:
+1. Analisis mendalam mengenai potensi unik diri saya.
+2. 3 rekomendasi bidang karir modern (era industri kreatif / digital) yang paling selaras.
+3. Roadmap langkah konkret harian/mingguan yang bisa saya lakukan sejak usia sekolah ini untuk mengasah kesiapan karir tersebut.
+
+Buat tanggapan Anda terstruktur rapi, inspiratif, dan padat makna tanpa bertele-tele.
+            `;
+
+            // Setup API call dengan systemInstruction & model kognitif gemini-2.5-flash-preview-09-2025
+            const apiKey = ""; // Disiapkan oleh lingkungan runtime
+            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const payload = {
+                contents: [{
+                    parts: [{ text: userQuery }]
+                }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                }
+            };
+
+            // Implementasi Exponential Backoff Retry up to 5 times (Sesuai standard operasional)
+            let success = false;
+            let resultText = "";
+            let delay = 1000;
+
+            for (let attempt = 1; attempt <= 5; attempt++) {
+                try {
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        resultText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, sistem tidak menerima respon kognitif yang memadai dari AI. Silakan coba sesaat lagi.";
+                        success = true;
+                        break;
+                    }
+                } catch (error) {
+                    // Retry terjadi di latar belakang tanpa mencemari log konsol
+                }
+
+                // Tunggu berdasarkan delay eksponensial (1s, 2s, 4s, 8s, 16s)
+                await new Promise(resolve => setTimeout(resolve, delay));
+                delay *= 2;
+            }
+
+            if (success) {
+                // Tampilkan hasil AI dan rapikan tampilan markdown dasar
+                responseBox.innerHTML = formatAIResponse(resultText);
+                logActivity("Konsultasi AI Karir", "Dashboard Konselor", 40, "Sukses");
+                addXP(30);
+            } else {
+                // Jika seluruh percobaan gagal, tampilkan simulator cerdas offline (Fallback offline)
+                const fallbackData = getOfflineConsultantAdvice(dominant);
+                responseBox.innerHTML = fallbackData;
+                logActivity("Konsultasi Konselor (Offline)", "Dashboard Konselor", 20, "Offline");
+            }
+
+            btn.removeAttribute('disabled');
+            btn.classList.remove('opacity-55', 'cursor-not-allowed');
+        }
+
+        // FORMAT SEDERHANA MARKDOWN KE HTML BERSIH UNTUK RESPONS GEMINI
+        function formatAIResponse(text) {
+            let formatted = text
+                .replace(/\n/g, '<br>')
+                .replace(/\*\*(.*?)\*\"/g, '<strong class="text-brandgreen font-bold">$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em class="text-slate-200">$1</em>')
+                .replace(/### (.*?)(<br>|$)/g, '<h4 class="text-sm font-extrabold text-white mt-4 mb-2">$1</h4>')
+                .replace(/## (.*?)(<br>|$)/g, '<h3 class="text-base font-black text-white mt-5 mb-2 border-b border-white/5 pb-1">$1</h3>');
+            return `<div class="space-y-2 text-justify">${formatted}</div>`;
+        }
+
+        // SIMULATOR KONSELOR OFFLINE JIKA API KEY TIDAK TERSEDIA / ERROR (Sesuai Syarat Mandatori)
+        function getOfflineConsultantAdvice(dominant) {
+            const types = dominant.split('-');
+            const primary = types[0];
+            
+            let html = `
+                <div class="space-y-4">
+                    <p class="text-xs text-red-400 font-bold uppercase"><i class="fa-solid fa-wifi-slash"></i> Sistem Mode Bimbingan Terlokalisasi (Offline)</p>
+                    <p class="text-xs">Maaf, koneksi eksternal AI premium kami sedang mengalami batas kuota pengiriman atau kunci API tidak terpasang. Sebagai gantinya, berikut adalah <strong>Skenario Analisis Konselor Terprogram</strong> untuk kode dominan Anda <strong>${dominant}</strong>:</p>
+                    
+                    <div class="p-3 bg-slate-900 border border-white/5 rounded-xl space-y-2">
+                        <h4 class="text-xs font-bold text-brandgreen uppercase">Analisis Kombinasi Karakter Utama:</h4>
+                        <p class="text-[11px] text-slate-300 leading-relaxed">Anda merupakan tipe siswa dengan gabungan keunikan <strong>${dominant}</strong>. Kombinasi ini melahirkan keseimbangan antara keterampilan teknis, analitis, serta visi orisinal. Anda adalah pemecah masalah yang andal di era digital.</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h4 class="text-xs font-bold text-brandblue uppercase">3 Rekomendasi Lapangan Karir Digital:</h4>
+                        <ul class="list-disc list-inside text-[11px] text-slate-300 space-y-1">
+                            <li><strong>Spesialis Pengembang Sistem (System & Tech Specialist):</strong> Sesuai untuk perpaduan Realistic & Investigative.</li>
+                            <li><strong>UI/UX Artist & Digital Visualizer:</strong> Sempurna untuk menyalurkan bakat ekspresi orisinal berselera tinggi.</li>
+                            <li><strong>Manajer Proyek Kreatif (Agile Scrum Master):</strong> Sangat cocok mengorganisir tim di era modern.</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            return html;
+        }
+
+        // INISIALISASI PEMILIHAN DEFAULT TABS LANDASAN TEORI
+        selectRiasecStep(0);
+        selectMethodologyStep(0);
+        updateQuizUI();
+    </script>
+</body>
+</html>
